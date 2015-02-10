@@ -1,0 +1,21 @@
+Buttons:
+Add Video
+Delete Video
+Check-In
+Check-Out
+Delete All Videos
+
+Text Fields:
+Name
+Category
+Length
+
+Display:
+Name
+Category
+Length
+Checked-Out
+Available
+
+Dropdown Menu:
+Categories of Movies in Database, including All Movies
