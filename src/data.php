@@ -3,8 +3,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+
 $mysqli = connectToSql($_POST);
-storeData($_POST, $mysqli);
+
+if($_POST['action'] == "addVideo")
+	setSql($_POST, $mysqli);
+
+getSql($mysqli);
+
+$mysqli->close();	//close connection
 
 
 /*-------- FUNCTION DEFINITIONS --------*/
@@ -28,8 +35,8 @@ function connectToSql($http) {
 	return $mysqli;
 }
 
-function storeData($http, $mysqli) {
-	//Fetch data from http request
+function setSql($http, $mysqli) {
+	//Variables to set
 	$name = $http['name'];
 	$category = $http['category'];
 	$length = $http['length'];
@@ -47,11 +54,36 @@ function storeData($http, $mysqli) {
 	if (!$stmt->execute()) {
 		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
+	else {
+		echo "Data successfully stored!";
+	}
 	
-	$stmt->close();
+	$stmt->close();		//close statement
 }
 
 
+function getSql($mysqli) {
+	//Variables to get
+	$out_name = NULL;
+	$out_category = NULL;
+	$out_length = NULL;
+	
+	//Prepared Statement - prepare
+	if (!($stmt = $mysqli->prepare("SELECT name, category, length FROM test"))) {
+		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+	
+	if (!$stmt->execute()) {
+		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+	}
+
+	//Bind results
+	if (!$stmt->bind_result($out_name, $out_category, $out_length)) {
+	    echo "Binding output parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+	}
+	
+	$stmt->close();		//close statement
+}
 
 ?>
 
