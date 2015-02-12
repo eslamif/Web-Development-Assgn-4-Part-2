@@ -4,11 +4,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header('Content-Type: text/html');
 
-include "functions.php";
+include "phpFunctions.php";
 
 
 /*--------------- MAIN PROGRAM ---------------*/
 ?>
+<script src="http://localhost/myhost-exemple/cs290-ass4-p2/src/jsFunctions.js"></script>
 
 <!--  ADD VIDEO INTERFACE -->
 <form action="http://localhost/myhost-exemple/cs290-ass4-p2/src/index.php" method="POST">
@@ -43,7 +44,7 @@ if(isset($_POST['action']) && $_POST['action'] == "addVideo")
 	setSql($_POST, $mysqli);
 
 getSql($mysqli);									//get video list from MySQL
-echo "<script> displayVideoList(); </script>";		//display video list to user
+echo "<script> httpRequest(); </script>";			//display video list to user
 $mysqli->close();									//close MySQL connection
 
 
