@@ -3,8 +3,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header('Content-Type: text/html');
-?>
 
+
+/*--------------- MAIN PROGRAM ---------------*/
+?>
 <!--  ADD VIDEO INTERFACE -->
 <form action="http://localhost/myhost-exemple/cs290-ass4-p2/src/index.php" method="POST">
 <fieldset>
@@ -28,7 +30,6 @@ header('Content-Type: text/html');
 </form>	
 
 
-
 <?php 
 $mysqli = connectToSql($_POST);		//connect to MySQL
 
@@ -36,12 +37,14 @@ $mysqli = connectToSql($_POST);		//connect to MySQL
 if(isset($_POST['action']) && $_POST['action'] == "addVideo")
 	setSql($_POST, $mysqli);
 
-getSql($mysqli);
-
+getSql($mysqli);					//get video list from MySQL
+//displaySql();						//display video list to user
 $mysqli->close();					//close MySQL connection
 
 
-/*-------- FUNCTION DEFINITIONS --------*/
+
+
+/*--------------- FUNCTION DEFINITIONS ---------------*/
 function connectToSql($http) {
 	//Set database variables
 	$dbhost = "localhost";
@@ -119,9 +122,6 @@ function getSql($mysqli) {
 		$mysqli->query("DELETE FROM test");
 	}
 		
-	
-	
-	
 	$stmt->close();		//close statement
 }
 
