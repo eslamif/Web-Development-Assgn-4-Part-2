@@ -5,12 +5,15 @@ ini_set('display_errors', 1);
 header('Content-Type: text/html');
 
 include "phpFunctions.php";
-
-
-/*--------------- MAIN PROGRAM ---------------*/
 ?>
-<script src="http://localhost/myhost-exemple/cs290-ass4-p2/src/jsFunctions.js"></script>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://localhost/myhost-exemple/cs290-ass4-p2/src/jsFunctions.js"></script>
+</head>
 
+<body>
 <!--  ADD VIDEO INTERFACE -->
 <form action="http://localhost/myhost-exemple/cs290-ass4-p2/src/index.php" method="POST">
 <fieldset>
@@ -33,7 +36,10 @@ include "phpFunctions.php";
 </fieldset>	
 </form>	
 
+<script> httpRequest(); </script>			<!-- display video list to user -->
 <div id="videoList">Video List from Database goes here!</div>
+</body>
+</html>
 
 
 <?php 
@@ -43,15 +49,7 @@ $mysqli = connectToSql($_POST);		//connect to MySQL
 if(isset($_POST['action']) && $_POST['action'] == "addVideo")
 	setSql($_POST, $mysqli);
 
-getSql($mysqli);									//get video list from MySQL
-echo "<script> httpRequest(); </script>";			//display video list to user
 $mysqli->close();									//close MySQL connection
-
-
-
-
-
-
 ?>
 
 

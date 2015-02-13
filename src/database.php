@@ -1,4 +1,17 @@
 <?php 
+$mysqli = connectToSql($_POST);		//connect to MySQL
+	$name = getSql($mysqli);
+
+//Get video list from MySQL
+if(isset($_GET['action']) && $_GET['action'] == "getVideoList") {
+	echo $name;
+}
+
+
+							
+$mysqli->close();									//close MySQL connection
+
+
 /*--------------- PHP FUNCTION DEFINITIONS ---------------*/
 function connectToSql($http) {
 	//Set database variables
@@ -57,6 +70,7 @@ function getSql($mysqli) {
 	//Bind results
 	if (!$stmt->bind_result($out_name, $out_category, $out_length)) {
 	    echo "Binding output parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+
 	}
 	
 
@@ -80,17 +94,11 @@ function getSql($mysqli) {
 		$mysqli->query("DELETE FROM test");
 	}
 	
-	if(isset($_GET['action']) && $_GET['action'] == 'getVideoList') {
-		$stmt->fetch();
-		echo $out_name;
-	}
-	
-	
+
+	return $out_name;
 	$stmt->close();		//close statement
 }
 
-if(isset($_GET['action']) && $_GET['action'] == 'getVideoList')
-	echo "Success";
 
 
 
