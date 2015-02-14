@@ -1,0 +1,44 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/jsFunctions.js"></script>
+</head>
+
+<body>
+<!--  ADD VIDEO INTERFACE -->
+<form>
+<fieldset>
+	<legend>Add Video</legend>
+	<input type="hidden" name="action" value="addVideo">
+	
+	<label>Name: 
+		<input id="name" type="text" name="name"> &nbsp&nbsp&nbsp&nbsp
+	</label>
+	
+	<label>Category: 
+		<input id="category" type="text" name="category"> &nbsp&nbsp&nbsp&nbsp
+	</label>		
+
+	<label>Length: 
+		<input id="length" type="text" name="length">
+	</label>
+	
+	<input type="button" onclick="httpAddVideo()" value="Add Video"></input>
+</fieldset>	
+</form>	
+
+<br>
+<br>
+
+<div id="videoList"></div>
+
+</body>
+</html>
+
+
+
+
+
+
