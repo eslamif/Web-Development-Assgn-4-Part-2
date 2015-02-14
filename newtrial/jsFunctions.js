@@ -20,7 +20,7 @@ function httpAddVideo() {
 			document.getElementById("videoList").innerText = http.responseText;
 		}
 	}
-	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?name=" + nameInput, true);
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=addVideo&name=" + nameInput, true);
 	http.send();
 }
 

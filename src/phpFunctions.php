@@ -25,7 +25,7 @@ function setSql($http, $mysqli) {
 	//Prepared Statement - prepare
 	if (!($stmt = $mysqli->prepare("INSERT INTO test(name, category, length) VALUES (?, ?, ?)"))) {
 		 echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
-	}	
+	}	v
 	
 	//Prepared Statement - bind and execute 
 	if (!$stmt->bind_param('ssi', $name, $category, $length)) {
