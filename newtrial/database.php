@@ -17,7 +17,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'getVideo') {
 	);
 	
 	$arr = json_encode($arr);	//encode to JSON string
-	echo $arr;	
+	echo $arr;					//return to callback function
 }
 
 

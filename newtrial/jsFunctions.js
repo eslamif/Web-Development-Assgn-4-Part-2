@@ -13,16 +13,22 @@ function getVideoList() {
 
 	http.onreadystatechange = function() {
 		if(http.readyState == 4) {
-			//document.getElementById("testing").innerText = http.responseText;
-			
 			var jsonStr = http.responseText;
-			var jsonObj = JSON.parse(obj);
-			document.getElementById("testing").innerText = json.name;
+			displayVideoList(jsonStr);			//call w/ JSON string
 		}
 	}
 	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=getVideo", true);
 	http.send();
 }
+
+
+function displayVideoList(jsonStr) {
+	var jsonObj = JSON.parse(jsonStr);			//convert JSON string to JSON object
+	document.getElementById("testing").innerText = jsonObj.name;
+	
+}
+
+
 
 
 function httpAddVideo() {
