@@ -26,6 +26,11 @@ function displayVideoList(jsonStr) {
 	var jsonObj = JSON.parse(jsonStr);			//convert JSON string to JSON object
 	document.getElementById("testing").innerText = jsonObj.name;
 	
+	for(var key in jsonObj) {
+		console.log(key + " = " + jsonObj[key]);
+	}
+	
+
 }
 
 

@@ -11,9 +11,8 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'getVideo') {
 	*/
 	
 	$arr = array(
-		'name' => 'Mike1',
-		'name' => 'Mike2',
-		'age' => 5
+		'name' => array('Mike1', 'John'),
+		'age' => array(5, 10)
 	);
 	
 	$arr = json_encode($arr);	//encode to JSON string
