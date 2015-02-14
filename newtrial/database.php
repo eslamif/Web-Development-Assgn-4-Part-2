@@ -2,13 +2,7 @@
 //Enable error detection
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-header('Content-Type: text/html');
-
-
-
-
-
-
+header('Content-Type: text/plain');
 
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'getVideo') {
 	/*
@@ -22,10 +16,8 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'getVideo') {
 		'age' => 5
 	);
 	
-	$arr = json_encode($arr);
-	echo $arr;
-	
-	
+	$arr = json_encode($arr);	//encode to JSON string
+	echo $arr;	
 }
 
 

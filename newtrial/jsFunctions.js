@@ -13,12 +13,11 @@ function getVideoList() {
 
 	http.onreadystatechange = function() {
 		if(http.readyState == 4) {
-			//var resultParsed = JSON.parse(http.responseText);	//save results
-			//var obj = http.responseText;
+			//document.getElementById("testing").innerText = http.responseText;
 			
-			//var obj = JSON.parse(http.responseText);
-			//document.getElementById("testing").innerText = obj;
-			document.getElementById("testing").innerText = http.responseText;
+			var jsonStr = http.responseText;
+			var jsonObj = JSON.parse(obj);
+			document.getElementById("testing").innerText = json.name;
 		}
 	}
 	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=getVideo", true);
