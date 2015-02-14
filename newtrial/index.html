@@ -6,10 +6,11 @@
 	<script src="http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/jsFunctions.js"></script>
 </head>
 
-<body>
+<body onload='getVideoList()'>
 <!--  ADD VIDEO INTERFACE -->
 <form>
 <fieldset>
+
 	<legend>Add Video</legend>
 	<input type="hidden" name="action" value="addVideo">
 	
@@ -27,13 +28,27 @@
 	
 	<input type="button" onclick="httpAddVideo()" value="Add Video"></input>
 	
+	<div id="videoList"></div>
 </fieldset>	
 </form>	
 
+
+
 <br>
 <br>
 
-<div id="videoList"></div>
+<table>
+<caption>Videos in Database</caption>
+	<tr> 
+		<th id='name'>Name</th> 
+		<th id='category'>Category</th> 
+		<th id='length'>Length</th> 
+		<th id='status'>Status</th> 
+		<th>Button</th> 
+	</tr>
+</table>
+
+<div id='testing'></div>
 
 </body>
 </html>
