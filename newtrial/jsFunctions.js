@@ -24,11 +24,29 @@ function getVideoList() {
 
 function displayVideoList(jsonStr) {
 	var jsonObj = JSON.parse(jsonStr);			//convert JSON string to JSON object
-	document.getElementById("testing").innerText = jsonObj.name;
 	
-	for(var key in jsonObj) {
-		console.log(key + " = " + jsonObj[key]);
+	for(var i = 0; i < jsonObj.length; i++) {
+		var name = jsonObj[i][0];
+		var category = jsonObj[i][1];
+		var length = jsonObj[i][2];
+		
+		var tr = document.createElement("tr");
+		document.getElementById('nextRow').appendChild(tr);
+		
+		var td = document.createElement("td");
+		td.innerText = name;
+		tr.appendChild(td);
+			
+		var td = document.createElement("td");
+		td.innerText = category;
+		tr.appendChild(td);
+		
+		var td = document.createElement("td");
+		td.innerText = length;
+		tr.appendChild(td);
 	}
+
+
 	
 
 }
