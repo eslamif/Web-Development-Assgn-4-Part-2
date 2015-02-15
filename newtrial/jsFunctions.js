@@ -44,14 +44,8 @@ function displayVideoList(jsonStr) {
 		var td = document.createElement("td");
 		td.innerText = length;
 		tr.appendChild(td);
-	}
-
-
-	
-
+	}		
 }
-
-
 
 
 function httpAddVideo() {
@@ -79,6 +73,8 @@ function httpAddVideo() {
 	}
 	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=addVideo&name=" + name + "&category=" + category + "&length=" + length, true);
 	http.send();
+	
+	window.location.reload();
 }
 
 
