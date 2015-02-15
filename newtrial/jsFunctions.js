@@ -37,7 +37,9 @@ function displayVideoList(jsonStr) {
 
 
 function httpAddVideo() {
-	var nameInput = document.getElementById("name").value;
+	var name = document.getElementById("name").value;
+	var category = document.getElementById("category").value;
+	var length = document.getElementById("length").value;
 	
 	var http;
 	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
@@ -54,10 +56,10 @@ function httpAddVideo() {
 	http.onreadystatechange = function() {
 		if(http.readyState == 4) {
 			//var resultParsed = JSON.parse(http.responseText);	//save results
-			document.getElementById("videoList").innerText = http.responseText + ' was added to the database.';
+			//document.getElementById("videoList").innerText = http.responseText + ' was added to the database.';
 		}
 	}
-	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=addVideo&name=" + nameInput, true);
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=addVideo&name=" + name + "&category=" + category + "&length=" + length, true);
 	http.send();
 }
 
