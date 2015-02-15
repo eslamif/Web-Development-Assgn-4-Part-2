@@ -23,6 +23,12 @@ if(isset($_REQUEST['action'])  && $_REQUEST['action'] == 'addVideo') {
 }
 
 
+//Delete All Videos from MySQL
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == "deleteAll") {
+	$mysqli = connectToSql($_REQUEST);
+	$mysqli->query("DELETE FROM test");
+}
+
 
 
 /*------------------- PHP FUNCTION DEFINITIONS -------------------*/
