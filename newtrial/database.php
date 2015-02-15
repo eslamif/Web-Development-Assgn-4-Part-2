@@ -54,14 +54,15 @@ function setSql($http, $mysqli) {
 	$name = $http['name'];
 	$category = $http['category'];
 	$length = $http['length'];
+	$status = "available";
 	
 	//Prepared Statement - prepare
-	if (!($stmt = $mysqli->prepare("INSERT INTO test(name, category, length) VALUES (?, ?, ?)"))) {
+	if (!($stmt = $mysqli->prepare("INSERT INTO test(name, category, length, status) VALUES (?, ?, ?, ?)"))) {
 		 echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 	}	
 	
 	//Prepared Statement - bind and execute 
-	if (!$stmt->bind_param('ssi', $name, $category, $length)) {
+	if (!$stmt->bind_param('ssis', $name, $category, $length, $status)) {
 		echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 	}	
 	
@@ -77,9 +78,10 @@ function getSql($mysqli) {
 	$out_name = NULL;
 	$out_category = NULL;
 	$out_length = NULL;
+	$out_status = NULL;
 	
 	//Prepared Statement - prepare
-	if (!($stmt = $mysqli->prepare("SELECT name, category, length FROM test"))) {
+	if (!($stmt = $mysqli->prepare("SELECT name, category, length, status FROM test"))) {
 		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 	}
 	
@@ -89,7 +91,7 @@ function getSql($mysqli) {
 	}
 
 	//Bind results
-	if (!$stmt->bind_result($out_name, $out_category, $out_length)) {
+	if (!$stmt->bind_result($out_name, $out_category, $out_length, $out_status)) {
 	    echo "Binding output parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
 	
@@ -97,7 +99,7 @@ function getSql($mysqli) {
 	$arrOuter = array();
 	$arrInner = array();
 	while($stmt->fetch()) {
-		$arrInner = [$out_name, $out_category, $out_length];
+		$arrInner = [$out_name, $out_category, $out_length, $out_status];
 		array_push($arrOuter, $arrInner);		
 	}
 	

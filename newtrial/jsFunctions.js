@@ -29,6 +29,7 @@ function displayVideoList(jsonStr) {
 		var name = jsonObj[i][0];
 		var category = jsonObj[i][1];
 		var length = jsonObj[i][2];
+		var status = jsonObj[i][3];
 		
 		var tr = document.createElement("tr");
 		document.getElementById('nextRow').appendChild(tr);
@@ -44,6 +45,10 @@ function displayVideoList(jsonStr) {
 		var td = document.createElement("td");
 		td.innerText = length;
 		tr.appendChild(td);
+		
+		var td = document.createElement("td");
+		td.innerText = status;
+		tr.appendChild(td);		
 	}		
 }
 
