@@ -48,7 +48,15 @@ function displayVideoList(jsonStr) {
 		
 		var td = document.createElement("td");
 		td.innerText = status;
-		tr.appendChild(td);		
+		tr.appendChild(td);	
+
+		var frm = document.createElement("form");
+		var butt = document.createElement("input");
+		butt.setAttribute("type", "button");
+		butt.setAttribute("value", "check in/out");
+		butt.setAttribute("onclick", "changeStatus()");
+		frm.appendChild(butt);
+		tr.appendChild(frm);
 	}		
 }
 
@@ -106,3 +114,31 @@ function deleteAllVideos() {
 	window.location.reload();	
 }
 
+
+function changeStatus() {
+	var name = this.getAttribute("name");
+	console.log(name);
+	
+	var http;
+	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
+		http = new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) {				//internet explore browser
+		http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	if(!http) {
+		throw 'Unable to create HttpRequest.';
+	}	
+
+	http.onreadystatechange = function() {
+		if(http.readyState == 4) {
+			//Do nothing client side
+		}
+	}
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=changeStatus&name=" + name, true);
+	http.send();
+	
+	window.location.reload();		
+	
+}

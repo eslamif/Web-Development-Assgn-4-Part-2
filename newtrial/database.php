@@ -30,6 +30,12 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "deleteAll") {
 }
 
 
+//Change Video Status
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == "changeStatus") {
+	$mysqli = connectToSql($_REQUEST);
+	$mysqli->query("UPDATE test SET ");
+}
+
 
 /*------------------- PHP FUNCTION DEFINITIONS -------------------*/
 function connectToSql($http) {

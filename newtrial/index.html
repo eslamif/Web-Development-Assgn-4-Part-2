@@ -34,17 +34,21 @@
 <br>
 <br>
 
-<table id='nextRow'>
-<caption>Videos in Database</caption>
-	<tr> 
-		<th>Name</th> 
-		<th>Category</th> 
-		<th>Length</th> 
-		<th>Status</th> 
-		<th>
-			<form> <input type="button" onclick="deleteAllVideos()" value="Delete All"></input> </form>
-		</th>
-	</tr>
+<table>
+	<caption>Videos in Database</caption>
+	<thead>
+		<tr> 
+			<th>Name</th> 
+			<th>Category</th> 
+			<th>Length</th> 
+			<th>Status</th> 
+			<th>
+				<form> <input type="button" onclick="deleteAllVideos()" value="Delete All"></input> </form>
+			</th>
+		</tr>
+	</thead>
+
+	<tbody id='nextRow'></tbody>
 </table>
 </body>
 </html>
