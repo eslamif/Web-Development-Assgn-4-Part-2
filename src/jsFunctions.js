@@ -1,10 +1,4 @@
-function displayVideoList() {
-	var videoList = httpRequest();					//obtain video listing from server
-	document.getElementByID("videoList").innerHTML="TESTING";
-	
-}
-
-function httpRequest() {
+function getVideoList() {
 	var http;
 	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
 		http = new XMLHttpRequest();
@@ -19,10 +13,132 @@ function httpRequest() {
 
 	http.onreadystatechange = function() {
 		if(http.readyState == 4) {
-			//var resultParsed = JSON.parse(http.responseText);	//save results
-			document.getElementById("videoList").innerHTML = http.responseText;
+			var jsonStr = http.responseText;
+			displayVideoList(jsonStr);			//call w/ JSON string
 		}
 	}
-	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/src/database.php?action=getVideoList", true);
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=getVideo", true);
 	http.send();
+}
+
+
+function displayVideoList(jsonStr) {
+	var jsonObj = JSON.parse(jsonStr);			//convert JSON string to JSON object
+	
+	for(var i = 0; i < jsonObj.length; i++) {
+		var name = jsonObj[i][0];
+		var category = jsonObj[i][1];
+		var length = jsonObj[i][2];
+		var status = jsonObj[i][3];
+		
+		var tr = document.createElement("tr");
+		document.getElementById('nextRow').appendChild(tr);
+		
+		var td = document.createElement("td");
+		td.innerText = name;
+		tr.appendChild(td);
+			
+		var td = document.createElement("td");
+		td.innerText = category;
+		tr.appendChild(td);
+		
+		var td = document.createElement("td");
+		td.innerText = length;
+		tr.appendChild(td);
+		
+		var td = document.createElement("td");
+		td.innerText = status;
+		tr.appendChild(td);	
+
+		var frm = document.createElement("form");
+		var butt = document.createElement("input");
+		butt.setAttribute("type", "button");
+		butt.setAttribute("value", "check in/out");
+		butt.setAttribute("onclick", "changeStatus()");
+		frm.appendChild(butt);
+		tr.appendChild(frm);
+	}		
+}
+
+
+function httpAddVideo() {
+	var name = document.getElementById("name").value;
+	var category = document.getElementById("category").value;
+	var length = document.getElementById("length").value;
+	
+	var http;
+	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
+		http = new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) {				//internet explore browser
+		http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	if(!http) {
+		throw 'Unable to create HttpRequest.';
+	}	
+
+	http.onreadystatechange = function() {
+		if(http.readyState == 4) {
+			//Do nothing client side
+		}
+	}
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=addVideo&name=" + name + "&category=" + category + "&length=" + length, true);
+	http.send();
+	
+	window.location.reload();
+}
+
+
+function deleteAllVideos() {
+	var http;
+	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
+		http = new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) {				//internet explore browser
+		http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	if(!http) {
+		throw 'Unable to create HttpRequest.';
+	}	
+
+	http.onreadystatechange = function() {
+		if(http.readyState == 4) {
+			//Do nothing client side
+		}
+	}
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=deleteAll", true);
+	http.send();
+	
+	window.location.reload();	
+}
+
+
+function changeStatus() {
+	var name = this.getAttribute("name");
+	console.log(name);
+	
+	var http;
+	if(window.XMLHttpRequest) {					//Browsers other than internet explorer
+		http = new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject) {				//internet explore browser
+		http = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	if(!http) {
+		throw 'Unable to create HttpRequest.';
+	}	
+
+	http.onreadystatechange = function() {
+		if(http.readyState == 4) {
+			//Do nothing client side
+		}
+	}
+	http.open("GET", "http://localhost/myhost-exemple/cs290-ass4-p2/newtrial/database.php?action=changeStatus&name=" + name, true);
+	http.send();
+	
+	window.location.reload();		
+	
 }

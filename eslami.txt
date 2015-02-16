@@ -1,0 +1,59 @@
+Start: Sun, 15 Feb 2015 15:30:00 -0800
+End: Sun, 15 Feb 2015 17:11:13 -0800
+Tasks: Added thead & tbody
+
+Start: Sun, 15 Feb 2015 10:15:00 -0800
+End: Sun, 15 Feb 2015 10:41:15 -0800
+Tasks: Added status 'available' to all new vide adds
+
+Start: Sun, 15 Feb 2015 09:30:41 -0800
+End: Sun, 15 Feb 2015 09:52:50 -0800
+Tasks: Page successfully displays video list upon revisit from external site
+
+Start: Sun, 15 Feb 2015 08:01:11 -0800
+End: Sun, 15 Feb 2015 09:25:43 -0800
+Tasks: AJAX successfully populates video list table. Next - test table w/o data
+
+Start: Sat, 14 Feb 2015 22:30:00 -0800
+End: Sat, 14 Feb 2015 23:16:14 -0800
+Tasks: Callback function returns JSON string
+
+Start: Sat, 14 Feb 2015 14:16:33 -0800
+End: Sat, 14 Feb 2015 14:46:32 -0800
+Tasks: Successfully implemented multi-dimensional array & Separated getVideoList() with displayVideoList()
+
+Start: Sat, 14 Feb 2015 13:00:42 -0800
+End: Sat, 14 Feb 2015 14:02:34 -0800
+Tasks: Server returns JSON object. Next - JS needs to display object in table
+
+Start: Sat, 14 Feb 2015 08:05:11 -0800
+End: Sat, 14 Feb 2015 09:24:00 -0800
+Tasks: Server added video to MySQL
+
+Start: Fri, 13 Feb 2015 15:51:00 -0800
+End: Fri, 13 Feb 2015 16:46:57 -0800
+Tasks: Fresh start. HTML, AJAX, Server communicate successfully
+
+Start: Fri, 13 Feb 2015 08:11:51 -0800
+End: Fri, 13 Feb 2015 08:50:46 -0800
+Tasks: Added separte database.php file. Next - cls
+
+Start: Thu, 12 Feb 2015 11:33:33 -0800
+End: Thu, 12 Feb 2015 12:44:49 -0800
+Tasks: Segregated functions to separate file. HTTP request not working
+
+Start: Thu, 12 Feb 2015 08:32:59 -0800
+End: Thu, 12 Feb 2015 10:14:47 -0800
+Tasks: Modularized code into functions. Next - implement AJAX to get video list from server
+
+Start: Wed, 11 Feb 2015 17:46:11 -0800
+End: Wed, 11 Feb 2015 21:05:57 -0800
+Tasks: Added table to display name, cat, length. Next - Delete All button
+
+Start: Tue, 10 Feb 2015 18:30:03-0800
+End: Tue, 10 Feb 2015 20:59:17 -0800
+Tasks: Connected to MySQL & Made an insert
+
+Start: Tue, 10 Feb 2015 11:00:00 -0800
+End: Tue, 10 Feb 2015 14:50:50 -0800
+Tasks: Created 'Add Video' interface

@@ -1,20 +1,45 @@
-<?php 
-$mysqli = connectToSql($_POST);		//connect to MySQL
-	$name = getSql($mysqli);
-
-//Get video list from MySQL
-if(isset($_GET['action']) && $_GET['action'] == "getVideoList") {
-	echo $name;
+<?php
+//Enable error detection
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header('Content-Type: text/html');
+	
+	
+//Get Video List from MySQL
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'getVideo') {	
+	$mysqli = connectToSql($_REQUEST);
+	$sqlQuery = getSql($mysqli);
+	$jsonStr = json_encode($sqlQuery);		//encode to JSON string
+	echo $jsonStr;
 }
 
 
-							
-$mysqli->close();									//close MySQL connection
+//Add Video to MySQL
+if(isset($_REQUEST['action'])  && $_REQUEST['action'] == 'addVideo') {
+	$mysqli = connectToSql($_REQUEST);
+	setSql($_REQUEST, $mysqli);
+	$return = $_REQUEST['name']; 
+	echo $return;
+}
 
 
-/*--------------- PHP FUNCTION DEFINITIONS ---------------*/
+//Delete All Videos from MySQL
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == "deleteAll") {
+	$mysqli = connectToSql($_REQUEST);
+	$mysqli->query("DELETE FROM test");
+}
+
+
+//Change Video Status
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == "changeStatus") {
+	$mysqli = connectToSql($_REQUEST);
+	$mysqli->query("UPDATE test SET ");
+}
+
+
+/*------------------- PHP FUNCTION DEFINITIONS -------------------*/
 function connectToSql($http) {
-	//Set database variables
+	//Database access info
 	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "root";
@@ -27,21 +52,23 @@ function connectToSql($http) {
 		$mysqli->connect_error;
 	}
 	return $mysqli;
-}
+}	
+
 
 function setSql($http, $mysqli) {
 	//Variables to set
 	$name = $http['name'];
 	$category = $http['category'];
 	$length = $http['length'];
+	$status = "available";
 	
 	//Prepared Statement - prepare
-	if (!($stmt = $mysqli->prepare("INSERT INTO test(name, category, length) VALUES (?, ?, ?)"))) {
+	if (!($stmt = $mysqli->prepare("INSERT INTO test(name, category, length, status) VALUES (?, ?, ?, ?)"))) {
 		 echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 	}	
 	
 	//Prepared Statement - bind and execute 
-	if (!$stmt->bind_param('ssi', $name, $category, $length)) {
+	if (!$stmt->bind_param('ssis', $name, $category, $length, $status)) {
 		echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 	}	
 	
@@ -57,51 +84,51 @@ function getSql($mysqli) {
 	$out_name = NULL;
 	$out_category = NULL;
 	$out_length = NULL;
+	$out_status = NULL;
 	
 	//Prepared Statement - prepare
-	if (!($stmt = $mysqli->prepare("SELECT name, category, length FROM test"))) {
+	if (!($stmt = $mysqli->prepare("SELECT name, category, length, status FROM test"))) {
 		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 	}
 	
+	//Prepared Statement - execute
 	if (!$stmt->execute()) {
 		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
 
 	//Bind results
-	if (!$stmt->bind_result($out_name, $out_category, $out_length)) {
+	if (!$stmt->bind_result($out_name, $out_category, $out_length, $out_status)) {
 	    echo "Binding output parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-
 	}
 	
-
-	
-
-	//Display results in table
-	echo "<table>";
-		echo "<tr> <td colspan=2>Video Listing</td>
-			<td colspan=2><form action=http://localhost/myhost-exemple/cs290-ass4-p2/src/index.php method=GET>
-				<button type=submit name=video value=true>Delete All</form></td>";
-		echo "<tr> <td>Name</td> <td>Category</td> <td>Length</td> <td>Status</td> </tr>";
-		while($stmt->fetch()) {
-			echo "<tr>";
-			echo "<td>".$out_name."</td> <td>".$out_category."</td> <td>".$out_length."</td>";
-			echo "</tr>";
-		}
-	echo "</table>";
-	
-	//Delete All Videos
-	if(isset($_GET['video']) && $_GET['video'] == TRUE) {
-		$mysqli->query("DELETE FROM test");
+	//Store result in array
+	$arrOuter = array();
+	$arrInner = array();
+	while($stmt->fetch()) {
+		$arrInner = [$out_name, $out_category, $out_length, $out_status];
+		array_push($arrOuter, $arrInner);		
 	}
 	
-
-	return $out_name;
-	$stmt->close();		//close statement
+	$stmt->close();	
+	return $arrOuter;
 }
-
-
-
-
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
